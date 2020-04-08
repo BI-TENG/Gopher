@@ -22,17 +22,21 @@
         }
 
         .red {
-            background-image: url(./小小兵圖案02.png);
-            animation: little 5s infinite;
-
+            /* background-image: url(./小小兵圖案02.png);
+            animation: little 5s infinite; */
+            background: red;
         }
 
-        @keyframes little {
+        /* @keyframes little {
             0% {}
-        }
+        } */
 
         .blue {
             background: blue;
+        }
+
+        .black {
+            background: black;
         }
 
         #list {
@@ -118,7 +122,7 @@
             inGame = true;
 
             // 重設時間
-            timeleft = 10;
+            timeleft = 60;
             textTime.innerText = timeleft;
         }
 
@@ -127,6 +131,7 @@
             for (let hole of holes) {
                 hole.classList.remove("red");
                 hole.classList.remove("blue");
+                hole.classList.remove("black");
             }
 
             // 隨機抽三格，變紅色
@@ -134,6 +139,11 @@
                 const rand = Math.floor(Math.random() * 9);
                 // classList 指 class 這元素
                 holes[rand].classList.add("red");
+            }
+
+            for (let j = 0; j < 1; j++) {
+                const rand1 = Math.floor(Math.random() * 9);
+                holes[rand1].classList.add("black");
             }
 
             // 時間減一
@@ -150,6 +160,7 @@
                 for (let hole of holes) {
                     hole.classList.remove("red");
                     hole.classList.remove("blue");
+                    hole.classList.remove("black");
                 }
                 // 啟用開始按鈕
                 btnStart.disabled = false;
@@ -186,6 +197,12 @@
                     hole.classList.remove("red");
                     // 加一分
                     score++;
+                    textScore.innerText = score;
+                }
+                else if (inGame && hole.classList.contains("black")) {
+                    hole.classList.add("blue");
+                    hole.classList.remove("black");
+                    score--;
                     textScore.innerText = score;
                 }
             }
