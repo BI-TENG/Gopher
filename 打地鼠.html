@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #game {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hole {
+            width: 200px;
+            height: 200px;
+
+            /* 滑鼠樣式、準心 */
+            cursor: url(./cursor2.png) 50 50, auto;
+        }
+
+        .red {
+            background-image: url(./小小兵圖案02.png);
+            animation: little 5s infinite;
+
+        }
+
+        @keyframes little {
+            0% {}
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        #list {
+            position: relative;
+            left: 15%;
+            transform: translate(0, 200%);
+        }
+    </style>
+</head>
+
+<body>
+    <table id="game" border="1">
+        <tr>
+            <td class="hole" id="hole7"></td>
+            <td class="hole" id="hole8"></td>
+            <td class="hole" id="hole9"></td>
+        </tr>
+        <tr>
+            <td class="hole" id="hole4"></td>
+            <td class="hole" id="hole5"></td>
+            <td class="hole" id="hole6"></td>
+        </tr>
+        <tr>
+            <td class="hole" id="hole1"></td>
+            <td class="hole" id="hole2"></td>
+            <td class="hole" id="hole3"></td>
+        </tr>
+    </table>
+
+    <div id="list">
+        <input type="button" value="START" id="btn-start"><br>
+        目前分數：<span id="text-score">0</span>
+        剩餘時間：<span id="text-time">10</span>
+        最高分：<br>
+        玩家：<span id="text-highplayer">沒有人</span> <br>
+        分數：<span id="text-highscore">0</span>
+    </div>
+
+    <script>
+        const holes = document.getElementsByClassName("hole");
+        const btnStart = document.getElementById("btn-start");
+        const textScore = document.getElementById("text-score");
+        const textTime = document.getElementById("text-time");
+        const textHighPlayer = document.getElementById("text-highplayer");
+        const textHighScore = document.getElementById("text-highscore");
+        const rihai = new Audio();
+        rihai.src = "./rihai.mp3";
+
+        // 分數
+        let score = 0;
+        // 是否在遊戲中
+        let inGame = false;
+        // 剩餘秒數
+        let timeleft = 10;
+        // 計時器
+        let timer = 0;
+        // 最高分
+        // f12 => application => local storage
+        // 抓瀏覽器的 { name: '', score: 0 }
+        let highscore = { name: '', score: 0 };
+        // 將localStorage 存的文字轉成可以使用的陣列
+        let storage = JSON.parse(localStorage.getItem("highscore"));
+        // 如果有分數紀錄
+        if (storage != null) {
+            // 將最高分紀錄存入變數並修改網頁文字
+            highscore.name = storage.name;
+            textHighPlayer.innerText = highscore.name;
+            highscore.score = storage.score;
+            textHighScore.innerText = highscore.score;
+        }
+
+        // 遊戲開始
+        btnStart.onclick = () => {
+            // 停用開始按鈕
+            btnStart.disabled = true
+            // 設定每秒變換一次
+            timer = setInterval(game, 1000)
+            game()
+            // 重製分數
+            score = 0;
+            textScore.innerText = score;
+            // 設定狀態為遊戲中
+            inGame = true;
+
+            // 重設時間
+            timeleft = 10;
+            textTime.innerText = timeleft;
+        }
+
+        const game = () => {
+            // 清掉格子的 class
+            for (let hole of holes) {
+                hole.classList.remove("red");
+                hole.classList.remove("blue");
+            }
+
+            // 隨機抽三格，變紅色
+            for (let i = 0; i < 3; i++) {
+                const rand = Math.floor(Math.random() * 9);
+                // classList 指 class 這元素
+                holes[rand].classList.add("red");
+            }
+
+            // 時間減一
+            timeleft--;
+            textTime.innerText = timeleft;
+
+            // 如果時間到了
+            if (timeleft == 0) {
+                // 設定狀態為不在遊戲中
+                inGame = false;
+                // 停止計時器
+                clearInterval(timer);
+                // 清掉格子的 class
+                for (let hole of holes) {
+                    hole.classList.remove("red");
+                    hole.classList.remove("blue");
+                }
+                // 啟用開始按鈕
+                btnStart.disabled = false;
+                alert(`你得到 ${score} 分`);
+
+                // 如果沒有分數紀錄，或是大於目前分數
+                if (storage == null || score > highscore.score) {
+                    rihai.play();
+                    // 請輸入名字
+                    const input = prompt("恭喜最高分，請輸入名字")
+                    // 如果有輸入
+                    if (input != null && input.trim() != '') {
+                        // 將輸入的名字與分數存入變數
+                        highscore.score = score;
+                        highscore.name = input;
+                        // 修改最高分文字
+                        textHighPlayer.innerText = highscore.name;
+                        textHighScore.innerText = highscore.score;
+                        // 將最高分變數轉文字後存入  localStorage
+                        localStorage.setItem("highscore", JSON.stringify(highscore))
+                    }
+                }
+            }
+        }
+
+        for (let hole of holes) {
+            hole.onclick = () => {
+                // 如果在遊戲中且包含 red
+                if (inGame && hole.classList.contains("red")) {
+                    // 標記為按下去
+                    // 新增藍色
+                    hole.classList.add("blue");
+                    // 移除紅色，雖然表面上沒差，但其實是用藍色蓋住紅色，而紅色本身還在
+                    hole.classList.remove("red");
+                    // 加一分
+                    score++;
+                    textScore.innerText = score;
+                }
+            }
+        }
+
+
+        document.onkeydown = (event) => {
+            const key = event.key;
+            // 如果按鍵式數字，且在遊戲中，數字為1~9
+            if (!isNaN(key) && inGame && key > 0 && key < 10) {
+                // 找到對應的格子
+                const target = document.getElementById(`hole${key}`);
+                // 觸發點擊事件
+                target.click()
+            }
+        }
+    </script>
+</body>
+
+</html>
