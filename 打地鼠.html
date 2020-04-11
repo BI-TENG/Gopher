@@ -4,28 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>打地鼠</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <style>
         #game {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+
         }
 
         .hole {
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
 
             /* 滑鼠樣式、準心 */
             cursor: url(./cursor2.png) 50 50, auto;
         }
 
-        .red {
-            background-image: url(./小小兵圖案02.png);
+        /* .red {
+            background-image: url(./小小兵.png);
             animation: little 5s infinite;
 
-        }
+        } */
 
         /* @keyframes little {
             0% {}
@@ -39,53 +41,168 @@
             background: black;
         }
 
-        #list {
-            position: relative;
-            left: 10%;
-            transform: translate(0, 100%);
-        }
+        /* #list {
+            margin-left: 15%;
+        } */
 
         #btn-start {
             background-image: url(./start.png);
+            background-repeat: no-repeat;
             border-radius: 3rem;
-            width: 278px;
-            height: 88px;
+            width: 150px;
+            height: 41px;
             border: 0px;
+        }
 
+        #time-menu {
+            width: 630px;
+            line-height: 10px;
+            text-align: left;
+
+        }
+
+        #text-time {
+            margin-left: 80%;
+            font-family: 'Lobster', cursive;
+            color: white;
+            font-size: 20px;
+        }
+
+        #text-time2 {
+            width: 155px;
+            height: 41px;
+            background-image: url(./剩餘時間.png);
+            background-repeat: no-repeat;
+        }
+
+        .yellow {
+            background-image: url(./小小兵.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 130px;
+            height: 119px;
+            /* transform: translate(0, 100px); */
+            animation: c 10s ease infinite;
+        }
+
+        @keyframes c {
+            from {
+                background-image: url(./小小兵.png);
+                background-repeat: no-repeat;
+                transform: translate(0, 150px);
+            }
+
+            50% {
+                background-image: url(./小小兵.png);
+                background-repeat: no-repeat;
+                transform: translate(0, 30px);
+            }
+
+            to {
+                background-image: url(./小小兵.png);
+                background-repeat: no-repeat;
+                transform: translate(0, 150px);
+            }
+        }
+
+        #lid {
+            width: 150px;
+            height: 24px;
+            background-image: url(./蓋子.png);
+            border-radius: 50%;
+            transform: translate(0, 240%);
+            position: absolute;
+            z-index: 0.5;
+        }
+
+
+        #background-black {
+            width: 150px;
+            height: 23px;
+            background-color: black;
+            border-radius: 50%;
+            transform: translate(0, 250%);
+            position: absolute;
+            z-index: -1;
         }
     </style>
 </head>
 
 <body>
-    <table id="game" border="1">
-        <tr>
-            <td class="hole" id="hole7"></td>
-            <td class="hole" id="hole8"></td>
-            <td class="hole" id="hole9"></td>
-            <td class="hole" id="hole9"></td>
-        </tr>
-        <tr>
-            <td class="hole" id="hole4"></td>
-            <td class="hole" id="hole5"></td>
-            <td class="hole" id="hole6"></td>
-            <td class="hole" id="hole9"></td>
-        </tr>
-        <tr>
-            <td class="hole" id="hole1"></td>
-            <td class="hole" id="hole2"></td>
-            <td class="hole" id="hole3"></td>
-            <td class="hole" id="hole9"></td>
-        </tr>
-    </table>
+    <div id="main">
+        <table id="time-menu">
+            <tr>
+                <td><input type="button" id="btn-start"></td>
+                <td style="width: 300px;"></td>
+                <td id="text-time2"><span id="text-time">60</span></td>
+            </tr>
+        </table>
+        <table id="game" border="1">
+            <tr>
+                <td class="hole" id="hole7" style="overflow: hidden; position: fixed;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole8" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole9" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole9" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="hole" id="hole4" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole5" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole6" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole9" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="hole" id="hole1" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole2" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole3" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+                <td class="hole" id="hole9" style="overflow: hidden;">
+                    <div id="background-black"></div>
+                    <div id="lid"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-    <div id="list">
-        <input type="button" id="btn-start"><br>
-        目前分數：<span id="text-score">0</span>
-        剩餘時間：<span id="text-time">10</span>
+
+    <div>
+        目前分數：<span id="text-score">0</span><br>
         最高分：<br>
         玩家：<span id="text-highplayer">沒有人</span> <br>
         分數：<span id="text-highscore">0</span>
     </div>
+
 
     <script>
         const holes = document.getElementsByClassName("hole");
@@ -141,7 +258,7 @@
         const game = () => {
             // 清掉格子的 class
             for (let hole of holes) {
-                hole.classList.remove("red");
+                hole.classList.remove("yellow");
                 hole.classList.remove("blue");
                 hole.classList.remove("black");
             }
@@ -150,7 +267,7 @@
             for (let i = 0; i < 3; i++) {
                 const rand = Math.floor(Math.random() * 9);
                 // classList 指 class 這元素
-                holes[rand].classList.add("red");
+                holes[rand].classList.add("yellow");
             }
 
             for (let j = 0; j < 1; j++) {
@@ -170,7 +287,7 @@
                 clearInterval(timer);
                 // 清掉格子的 class
                 for (let hole of holes) {
-                    hole.classList.remove("red");
+                    hole.classList.remove("yellow");
                     hole.classList.remove("blue");
                     hole.classList.remove("black");
                 }
@@ -201,12 +318,12 @@
         for (let hole of holes) {
             hole.onclick = () => {
                 // 如果在遊戲中且包含 red
-                if (inGame && hole.classList.contains("red")) {
+                if (inGame && hole.classList.contains("yellow")) {
                     // 標記為按下去
                     // 新增藍色
                     hole.classList.add("blue");
                     // 移除紅色，雖然表面上沒差，但其實是用藍色蓋住紅色，而紅色本身還在
-                    hole.classList.remove("red");
+                    hole.classList.remove("yellow");
                     // 加一分
                     score++;
                     textScore.innerText = score;

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #game {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+        }
+
+        #yellow {
+
+            background-image: url(./小小兵.png);
+            background-position: center;
+            width: 130px;
+            height: 119px;
+            transform: translate(0, 100px);
+            animation: c 10s ease infinite;
+        }
+
+
+        #lid {
+            width: 150px;
+            height: 24px;
+            background-image: url(./蓋子.png);
+            border-radius: 50%;
+            transform: translate(-5px, -20%);
+            position: absolute;
+            z-index: 0.5;
+        }
+
+
+        #background-black {
+            width: 150px;
+            height: 23px;
+            background-color: black;
+            border-radius: 50%;
+            transform: translate(-5px, 500%);
+            position: absolute;
+            z-index: -1;
+        }
+
+        @keyframes c {
+            from {
+                transform: translate(0, 150px);
+            }
+
+            50% {
+                transform: translate(0, 30px);
+            }
+
+            to {
+                transform: translate(0, 150px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <table id="game">
+        <tr>
+            <td style="overflow: hidden;">
+                <div id="background-black"></div>
+                <div id="yellow"></div>
+                <div id="lid"></div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
