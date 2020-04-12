@@ -7,7 +7,24 @@
     <title>打地鼠</title>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <style>
-        #game {
+        body {
+            background-image: url(./磚塊.png);
+            background-repeat: repeat-x;
+
+            background-size: contain;
+            background-position: 0 590px;
+        }
+
+        #mushroom {
+            background-image: url(./蘑菇.png);
+            background-repeat: no-repeat;
+            width: 50px;
+            height: 50px;
+            transform: translate(50%, 500%);
+
+        }
+
+        #main {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -23,16 +40,6 @@
             cursor: url(./cursor2.png) 50 50, auto;
         }
 
-        /* .red {
-            background-image: url(./小小兵.png);
-            animation: little 5s infinite;
-
-        } */
-
-        /* @keyframes little {
-            0% {}
-        } */
-
         .blue {
             background: blue;
         }
@@ -41,9 +48,11 @@
             background: black;
         }
 
-        /* #list {
-            margin-left: 15%;
-        } */
+        #list {
+            width: 150px;
+            height: 100px;
+            border: 1px black solid;
+        }
 
         #btn-start {
             background-image: url(./start.png);
@@ -58,7 +67,6 @@
             width: 630px;
             line-height: 10px;
             text-align: left;
-
         }
 
         #text-time {
@@ -75,33 +83,32 @@
             background-repeat: no-repeat;
         }
 
+        #pipe {
+            position: relative;
+            top: 60px;
+
+        }
+
         .yellow {
             background-image: url(./小小兵.png);
             background-repeat: no-repeat;
-            background-position: center;
-            width: 130px;
-            height: 119px;
-            /* transform: translate(0, 100px); */
-            animation: c 10s ease infinite;
+            background-position: center 40px;
+            animation: yellow1 1s linear forwards;
         }
 
-        @keyframes c {
+        @keyframes yellow1 {
+
+            /* 不能用 transform，會造成格子和背景一起移動 */
             from {
-                background-image: url(./小小兵.png);
-                background-repeat: no-repeat;
-                transform: translate(0, 150px);
+                background-position: center 150px;
             }
 
             50% {
-                background-image: url(./小小兵.png);
-                background-repeat: no-repeat;
-                transform: translate(0, 30px);
+                background-position: center 10px;
             }
 
             to {
-                background-image: url(./小小兵.png);
-                background-repeat: no-repeat;
-                transform: translate(0, 150px);
+                background-position: center 150px;
             }
         }
 
@@ -116,14 +123,12 @@
         }
 
 
-        #background-black {
+        .background-black {
             width: 150px;
             height: 23px;
             background-color: black;
             border-radius: 50%;
-            transform: translate(0, 250%);
             position: absolute;
-            z-index: -1;
         }
     </style>
 </head>
@@ -137,72 +142,39 @@
                 <td id="text-time2"><span id="text-time">60</span></td>
             </tr>
         </table>
-        <table id="game" border="1">
+        <table id="game">
             <tr>
-                <td class="hole" id="hole7" style="overflow: hidden; position: fixed;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole8" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole9" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole9" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
+                <td class="hole" id="hole7"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole8"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole9"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole9"><img src="./水管.png" id="pipe"></td>
             </tr>
             <tr>
-                <td class="hole" id="hole4" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole5" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole6" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole9" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
+                <td class="hole" id="hole4"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole5"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole6"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole9"><img src="./水管.png" id="pipe"></td>
             </tr>
             <tr>
-                <td class="hole" id="hole1" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole2" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole3" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
-                <td class="hole" id="hole9" style="overflow: hidden;">
-                    <div id="background-black"></div>
-                    <div id="lid"></div>
-                </td>
+                <td class="hole" id="hole1"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole2"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole3"><img src="./水管.png" id="pipe"></td>
+                <td class="hole" id="hole9"><img src="./水管.png" id="pipe"></td>
             </tr>
         </table>
     </div>
 
 
-    <div>
+    <div id="list">
         目前分數：<span id="text-score">0</span><br>
         最高分：<br>
         玩家：<span id="text-highplayer">沒有人</span> <br>
         分數：<span id="text-highscore">0</span>
     </div>
 
+    <!-- 蘑菇 -->
+
+    <div id="mushroom"></div>
 
     <script>
         const holes = document.getElementsByClassName("hole");
