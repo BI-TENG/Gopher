@@ -408,7 +408,12 @@
                 else if (inGame && hole.classList.contains("Mario")) {
                     hole.classList.add("angry");
                     hole.classList.remove("Mario");
-                    score--;
+                    if (score == 0) {
+                        score == score
+                    }
+                    else {
+                        score--
+                    }
                     textScore.innerText = score;
                 }
             }
