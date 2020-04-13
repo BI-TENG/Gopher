@@ -61,6 +61,29 @@
             }
         }
 
+        #turtle {
+            background-image: url(./images/蘑菇.png);
+            background-repeat: no-repeat;
+            width: 50px;
+            height: 71px;
+            position: absolute;
+            right: 0%;
+            bottom: 10%;
+            animation: turtle 5s alternate infinite;
+        }
+
+
+        @keyframes turtle {
+            0% {
+                transform: translate(-600%, 0%);
+            }
+
+            100% {
+                transform: translate(0%, 0%);
+            }
+        }
+
+
         #game {
             position: absolute;
             left: 50%;
@@ -278,7 +301,7 @@
     <!-- 蘑菇 -->
     <div id="mushroom"></div>
     <div id="mushroom1"></div>
-
+    <div id="turtle"></div>
     <script>
         const holes = document.getElementsByClassName("hole");
         const btnStart = document.getElementById("btn-start");
