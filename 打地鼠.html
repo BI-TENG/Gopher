@@ -95,8 +95,17 @@
             height: 150px;
 
             /* 滑鼠樣式、準心 */
-            cursor: url(./cursor2.png) 50 50, auto;
+            cursor: url(./images/滑鼠.png) 50 50, auto;
         }
+
+        .hole:active {
+            width: 150px;
+            height: 150px;
+
+            /* 滑鼠樣式、準心 */
+            cursor: url(./images/點擊.png) 50 50, auto;
+        }
+
 
         #list {
             width: 150px;
@@ -161,7 +170,7 @@
 
             /* 不能用 transform，會造成格子和背景一起移動 */
             from {
-                background-position: center 150px;
+                background-position: center 120px;
             }
 
             50% {
@@ -169,7 +178,7 @@
             }
 
             to {
-                background-position: center 150px;
+                background-position: center 120px;
             }
         }
 
@@ -187,7 +196,7 @@
             }
 
             50% {
-                background-position: center 150px;
+                background-position: center 120px;
             }
 
             to {
@@ -205,7 +214,7 @@
         @keyframes flower1 {
 
             from {
-                background-position: center 150px;
+                background-position: center 120px;
             }
 
             50% {
@@ -213,7 +222,7 @@
             }
 
             to {
-                background-position: center 150px;
+                background-position: center 120px;
             }
         }
 
@@ -231,7 +240,7 @@
             }
 
             50% {
-                background-position: center 150px;
+                background-position: center 120px;
             }
 
             to {
@@ -289,7 +298,7 @@
 
     <div id="list">
         目前分數：<span id="text-score">0</span><br>
-        最高分：<br>
+        最高分：0<br>
         玩家：<span id="text-highplayer">沒有人</span> <br>
         分數：<span id="text-highscore">0</span>
     </div>
@@ -308,7 +317,7 @@
         const textHighPlayer = document.getElementById("text-highplayer");
         const textHighScore = document.getElementById("text-highscore");
         const rihai = new Audio();
-        rihai.src = "./rihai.mp3";
+        rihai.src = "./過關音效.mp3";
 
         // 分數
         let score = 0;
@@ -360,16 +369,16 @@
                 hole.classList.remove("angry");
             }
 
-            // 隨機抽三格，變紅色
-            for (let i = 0; i < 3; i++) {
+            // 隨機抽四格
+            for (let i = 0; i < 4; i++) {
                 const rand = Math.floor(Math.random() * 9);
-                // classList 指 class 這元素
-                holes[rand].classList.add("flower");
-            }
-
-            for (let j = 0; j < 1; j++) {
-                const rand = Math.floor(Math.random() * 9);
-                holes[rand].classList.add("Mario");
+                if (i < 3) {
+                    // classList 指 class 這元素
+                    holes[rand].classList.add("flower");
+                }
+                else {
+                    holes[rand].classList.add("Mario");
+                }
             }
 
             // 時間減一
