@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>打地鼠</title>
+    <title>打地鼠-超級瑪利歐版</title>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <style>
         body {
@@ -26,11 +26,11 @@
         }
 
         #mushroom {
-            background-image: url(./images/蘑菇.png);
+            background-image: url(./images/蘑菇.gif);
             background-repeat: no-repeat;
             width: 50px;
             height: 50px;
-            animation: mumushroom 5s alternate infinite;
+            animation: mumushroom 10s alternate infinite;
         }
 
         @keyframes mumushroom {
@@ -44,11 +44,11 @@
         }
 
         #mushroom1 {
-            background-image: url(./images/蘑菇.png);
+            background-image: url(./images/蘑菇.gif);
             background-repeat: no-repeat;
             width: 50px;
             height: 50px;
-            animation: mumushroom1 4s alternate infinite;
+            animation: mumushroom1 15s alternate infinite;
         }
 
         @keyframes mumushroom1 {
@@ -61,19 +61,19 @@
             }
         }
 
-        #turtle {
-            background-image: url(./images/蘑菇.png);
+        #mushroom2 {
+            background-image: url(./images/蘑菇.gif);
             background-repeat: no-repeat;
             width: 50px;
             height: 71px;
             position: absolute;
             right: 0%;
             bottom: 10%;
-            animation: turtle 5s alternate infinite;
+            animation: mushroom2 5s alternate infinite;
         }
 
 
-        @keyframes turtle {
+        @keyframes mushroom2 {
             0% {
                 transform: translate(-600%, 0%);
             }
@@ -161,7 +161,7 @@
 
             /* 不能用 transform，會造成格子和背景一起移動 */
             from {
-                background-position: center 100px;
+                background-position: center 150px;
             }
 
             50% {
@@ -169,7 +169,7 @@
             }
 
             to {
-                background-position: center 100px;
+                background-position: center 150px;
             }
         }
 
@@ -187,7 +187,7 @@
             }
 
             50% {
-                background-position: center 100px;
+                background-position: center 150px;
             }
 
             to {
@@ -205,7 +205,7 @@
         @keyframes flower1 {
 
             from {
-                background-position: center 100px;
+                background-position: center 150px;
             }
 
             50% {
@@ -213,7 +213,7 @@
             }
 
             to {
-                background-position: center 100px;
+                background-position: center 150px;
             }
         }
 
@@ -231,7 +231,7 @@
             }
 
             50% {
-                background-position: center 100px;
+                background-position: center 150px;
             }
 
             to {
@@ -246,12 +246,10 @@
         <tr>
             <td style="text-align: center;"><img src="./images/flower.png" width="50px" height="50px"></td>
             <td style="text-align: center;"><img src="./images/馬力歐.png" width="40px" height="50px"></td>
-            <td style="text-align: center;"></td>
         </tr>
         <tr>
             <td style="height: 20px; text-align: center;">+1</td>
             <td style="height: 20px; text-align: center;">-1</td>
-            <td style="height: 20px; text-align: center;">-0</td>
         </tr>
     </table>
 
@@ -301,7 +299,7 @@
     <!-- 蘑菇 -->
     <div id="mushroom"></div>
     <div id="mushroom1"></div>
-    <div id="turtle"></div>
+    <div id="mushroom2"></div>
     <script>
         const holes = document.getElementsByClassName("hole");
         const btnStart = document.getElementById("btn-start");
