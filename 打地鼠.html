@@ -93,7 +93,7 @@
         .hole {
             width: 150px;
             height: 150px;
-
+            position: relative;
             /* 滑鼠樣式、準心 */
             cursor: url(./images/滑鼠.png) 50 50, auto;
         }
@@ -144,9 +144,9 @@
             background-repeat: no-repeat;
         }
 
-        #pipe {
-            position: relative;
-            top: 65px;
+        .pipe {
+            position: absolute;
+            top: 120px;
 
         }
 
@@ -247,6 +247,50 @@
                 background-position: center 10px;
             }
         }
+
+        .star {
+            background-image: url(./images/star.png);
+            background-repeat: no-repeat;
+            background-position: center 40px;
+            animation: star 1s linear forwards;
+        }
+
+        @keyframes star {
+
+            from {
+                background-position: center 120px;
+            }
+
+            50% {
+                background-position: center 10px;
+            }
+
+            to {
+                background-position: center 120px;
+            }
+        }
+
+        .star2 {
+            background-image: url(./images/star2.png);
+            background-repeat: no-repeat;
+            background-position: center 40px;
+            animation: star2 1s linear forwards;
+        }
+
+        @keyframes star2 {
+
+            from {
+                background-position: center 10px;
+            }
+
+            50% {
+                background-position: center 120px;
+            }
+
+            to {
+                background-position: center 10px;
+            }
+        }
     </style>
 </head>
 
@@ -254,11 +298,13 @@
     <table id="menu" border="1px">
         <tr>
             <td style="text-align: center;"><img src="./images/flower.png" width="50px" height="50px"></td>
-            <td style="text-align: center;"><img src="./images/馬力歐.png" width="40px" height="50px"></td>
+            <td style="text-align: center;"><img src="./images/馬力歐.png" width="50px" height="50px"></td>
+            <td style="text-align: center;"><img src="./images/star.png" width="50px" height="50px"></td>
         </tr>
         <tr>
-            <td style="height: 20px; text-align: center;">+1</td>
-            <td style="height: 20px; text-align: center;">-1</td>
+            <td style="height: 20px; text-align: center;">+1分</td>
+            <td style="height: 20px; text-align: center;">-1分</td>
+            <td style="height: 20px; text-align: center;">時間 +5秒</td>
         </tr>
     </table>
 
@@ -270,35 +316,35 @@
         </tr>
         <tr>
             <td id="text-time2">
-                <span id="text-time">60</span>
+                <span id="text-time">10</span>
             </td>
         </tr>
     </table>
 
     <table id="game">
         <tr>
-            <td class="hole" id="hole7"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole8"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole9"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole9"><img src="./images/水管.png" id="pipe"></td>
+            <td class="hole" id="hole7"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole8"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole9"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole9"><img src="./images/水管.png" class="pipe"></td>
         </tr>
         <tr>
-            <td class="hole" id="hole4"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole5"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole6"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole9"><img src="./images/水管.png" id="pipe"></td>
+            <td class="hole" id="hole4"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole5"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole6"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole9"><img src="./images/水管.png" class="pipe"></td>
         </tr>
         <tr>
-            <td class="hole" id="hole1"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole2"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole3"><img src="./images/水管.png" id="pipe"></td>
-            <td class="hole" id="hole9"><img src="./images/水管.png" id="pipe"></td>
+            <td class="hole" id="hole1"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole2"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole3"><img src="./images/水管.png" class="pipe"></td>
+            <td class="hole" id="hole9"><img src="./images/水管.png" class="pipe"></td>
         </tr>
     </table>
 
     <div id="list">
-        目前分數：<span id="text-score">0</span><br>
-        最高分：0<br>
+        目前分數：<span id="text-score">0</span><br><br>
+        最高分：<br>
         玩家：<span id="text-highplayer">沒有人</span> <br>
         分數：<span id="text-highscore">0</span>
     </div>
@@ -309,6 +355,7 @@
     <div id="mushroom"></div>
     <div id="mushroom1"></div>
     <div id="mushroom2"></div>
+
     <script>
         const holes = document.getElementsByClassName("hole");
         const btnStart = document.getElementById("btn-start");
@@ -317,7 +364,7 @@
         const textHighPlayer = document.getElementById("text-highplayer");
         const textHighScore = document.getElementById("text-highscore");
         const rihai = new Audio();
-        rihai.src = "./過關音效.mp3";
+        rihai.src = "./過關音效.M4A";
 
         // 分數
         let score = 0;
@@ -356,7 +403,7 @@
             inGame = true;
 
             // 重設時間
-            timeleft = 60;
+            timeleft = 10;
             textTime.innerText = timeleft;
         }
 
@@ -367,18 +414,43 @@
                 hole.classList.remove("flower2");
                 hole.classList.remove("Mario");
                 hole.classList.remove("angry");
+                hole.classList.remove("star");
+                hole.classList.remove("star2");
             }
 
-            // 隨機抽四格
-            for (let i = 0; i < 4; i++) {
-                const rand = Math.floor(Math.random() * 9);
-                if (i < 3) {
-                    // classList 指 class 這元素
-                    holes[rand].classList.add("flower");
+            // 不重複的隨機抽
+            let ary = []
+            for (let i = 0; i < 3; i++) {
+                const rand = Math.floor(Math.random() * 12);
+                if (ary.includes(rand)) {
+                    i--;
+                    continue;
                 }
-                else {
-                    holes[rand].classList.add("Mario");
+                ary.push(rand);
+                console.log(ary);
+                // classList 指 class 這元素
+                holes[rand].classList.add("flower");
+            }
+
+            for (let i = 0; i < 2; i++) {
+                const rand = Math.floor(Math.random() * 12);
+                if (ary.includes(rand)) {
+                    i--;
+                    continue;
                 }
+                ary.push(rand);
+                console.log(ary);
+                holes[rand].classList.add("Mario");
+            }
+
+            for (let i = 0; i < 1; i++) {
+                const rand = Math.floor(Math.random() * 12);
+                if (ary.includes(rand)) {
+                    i--;
+                    continue;
+                }
+                ary.push(rand);
+                holes[rand].classList.add("star")
             }
 
             // 時間減一
@@ -397,6 +469,8 @@
                     hole.classList.remove("flower2");
                     hole.classList.remove("Mario");
                     hole.classList.remove("angry");
+                    hole.classList.remove("star");
+                    hole.classList.remove("star2");
                 }
                 // 啟用開始按鈕
                 btnStart.disabled = false;
@@ -427,14 +501,15 @@
                 // 如果在遊戲中且包含 red
                 if (inGame && hole.classList.contains("flower")) {
                     // 標記為按下去
-                    // 新增藍色
+                    // 新增flower2
                     hole.classList.add("flower2");
-                    // 移除紅色，雖然表面上沒差，但其實是用藍色蓋住紅色，而紅色本身還在
+                    // 移除flower，雖然表面上沒差，但其實是用藍色蓋住紅色，而紅色本身還在
                     hole.classList.remove("flower");
                     // 加一分
                     score++;
                     textScore.innerText = score;
                 }
+                // 減分
                 else if (inGame && hole.classList.contains("Mario")) {
                     hole.classList.add("angry");
                     hole.classList.remove("Mario");
@@ -446,20 +521,27 @@
                     }
                     textScore.innerText = score;
                 }
+                // 加時間
+                else if (inGame && hole.classList.contains("star")) {
+                    hole.classList.add("star2")
+                    hole.classList.remove("star");
+                    timeleft += 5
+                    textTime.innerText = timeleft;
+                }
             }
         }
 
 
-        document.onkeydown = (event) => {
-            const key = event.key;
-            // 如果按鍵式數字，且在遊戲中，數字為1~9
-            if (!isNaN(key) && inGame && key > 0 && key < 10) {
-                // 找到對應的格子
-                const target = document.getElementById(`hole${key}`);
-                // 觸發點擊事件
-                target.click()
-            }
-        }
+        // document.onkeydown = (event) => {
+        //     const key = event.key;
+        //     // 如果按鍵是數字，且在遊戲中，數字為1~9
+        //     if (!isNaN(key) && inGame && key > 0 && key < 10) {
+        //         // 找到對應的格子
+        //         const target = document.getElementById(`hole${key}`);
+        //         // 觸發點擊事件
+        //         target.click()
+        //     }
+        // }
     </script>
 </body>
 
